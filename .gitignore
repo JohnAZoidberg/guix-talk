@@ -1,0 +1,21 @@
+# Nix
+result
+
+# Latex
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.pdf
+*.snm
+*.toc
+*.vrb
+*.synctex.gz
+*.bcf
+*.blg
+*.run.xml
+*.bbl
+
+latexmk_log.txt
