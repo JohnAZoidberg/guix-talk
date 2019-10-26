@@ -1,6 +1,6 @@
 \documentclass[
   10pt
-, handout
+%, handout
 ]{beamer}
 
 \usepackage{pgfpages}
@@ -9,7 +9,7 @@
 % Use T1 Font encoding to support more glyphs
 \usepackage[T1]{fontenc}
 
-%\setbeameroption{show notes on second screen}
+\setbeameroption{show notes on second screen}
 
 % Number sections in table of contents
 \setbeamertemplate{section in toc}[sections numbered]
@@ -94,31 +94,24 @@
     Why do I talk about Guix?
   \end{center}
 
-  % Had finished writing my thesis
-  % NixCon coming up
-  % I thought: Hey, I'm knowledgeable about Nix, I could hold my first ever conference talk
-  % No idea for a topic
-  % Was interested in Guix before:
-    % What do they do different?
-    % Could we steal some ideas?
-    % Are they fundamentally better?
-  %
-  % -> Please take all of this with a grain of salt
+  \note[item]{Thesis finished, NixCon announced}
+  \note[item]{Seems interesting, not in Nix???}
+  \note[item]{Compare and see what we can learn}
+  \note[item]{Not an expert!}
+  \note[item]{GUIX for presentation}
 \end{frame}
 
 \section{What is Guix?}
 
 \begin{frame}{What is Guix?}
-  % TODO: Maybe come up with better descriptions
   \begin{itemize}
-    \item<+-> Functional package manager
-    \item<+-> Distribution with 100\% declarative configuration
-    \item<+-> Transactional upgrades and roll-backs
-    \item<+-> Unprivileged package management
-    % Wait, wait, wait, these features look familiar
-    % Okay, from the title of this talk you can guess where we're going
-    \item<+-> \st{A language}
+    \item<1-> Functional package manager
+    \item<2-> Distribution with 100\% declarative configuration
+    \item<3-> Transactional upgrades and roll-backs
+    \item<4-> Unprivileged package management
+    \item<5-> \st{A language}
   \end{itemize}
+  \note<4>[item]{Looks familiar?}
 \end{frame}
 
 \begin{frame}{Nix $\rightarrow$ Guix}
@@ -126,28 +119,26 @@
   % How do we get from Nix to Guix?
   % There are three different ways to look at it
   \begin{itemize}
-    % Any reader of Eelcos thesis, user of Nix and NixOS will feel at home
-    \item<+-> Another implementation of the ideas of Nix and NixOS
-    % Guix commandline is very similar
-      % Mostly just different names, sometimes slightly different behaviour
-      % Almost all additional features, we could just add to our tools
-    % Nixpkgs basically the same in a different language and different standard library
-    % NixOS: Services as extending hierarchy, rather than merged attribute sets
-    \item<+-> A reimplementation of Nix, nixpkgs and NixOS
-    % The daemon is literally forked and now incompatible
-    % Rebranded lots of variables
-    \item<+-> A fork of Nix (daemon)
+    \item<1-> Another implementation of the ideas of Nix and NixOS
+    \item<2-> A reimplementation of Nix, nixpkgs and NixOS
+    \item<3-> A fork of Nix (daemon)
   \end{itemize}
+  \note<1>[item]{Feel at home: Eelcos thesis, user of Nix}
+  \note<2>[item]{Commandline: Diff names, slightly diff behaviour}
+  \note<2>[item]{             We could add additional features}
+  \note<2>[item]{Nixpkgs alomst same, different language and stdlib}
+  \note<2>[item]{Services as extending hierarchy, rather merged attrsets}
+  \note<3>[item]{Daemon literally forked -> Rebranded -> Incompatible}
 \end{frame}
 
 \begin{frame}{No, but really. What is Guix - Nix?}
   \begin{center}
     \begin{itemize}
-      \item<-+> Basically Nix/NixOS
-      % Language, command names, library
-      \item<-+> With a different \textit{UI}
+      \item<+-> Basically Nix/NixOS
+      \item<+-> With a different \textit{UI}
     \end{itemize}
   \end{center}
+  \note[item]{Diff: Lanugage, command names, library}
 \end{frame}
 
 \begin{frame}{No, but really. What is Guix - Nix?}
@@ -162,20 +153,22 @@
 
 \begin{frame}{\textbf{Everything} is written in Guile (Scheme)}
   \begin{itemize}
-    \item<+-> \st{Bootloader}
-    \item<+-> \st{Kernel}
-    \item<+-> Initrd
-    % It's very laudable to have a new systemd-less distribution, with it's own init]
-    \item<+-> PID 1 (GNU Shepherd, née dmd)
-    \item<+-> \st{Guix Daemon} (Planned) % But probably not soon, everything's fine and the daemon doesn't make much of a difference anyways
-    \item<+-> Guix commandline tools
-    \item<+-> Service Configuration
-    \item<+-> Package Definitions (No Shell):
+    \item<1-> \st{Bootloader}
+    \item<2-> \st{Kernel}
+    \item<3-> Initrd
+    \item<4-> PID 1 (GNU Shepherd, née dmd)
+    \item<5-> \st{Guix Daemon} (Planned)
+    \item<6-> Guix commandline tools
+    \item<7-> Service Configuration
+    \item<8-> Package Definitions (No Shell):
       \begin{itemize}
         \item Phases
         \item Wrappers
       \end{itemize}
   \end{itemize}
+  \note<4>[item]{Impressive, to be a new systemd-less distro, with own init}
+  \note<5>[item]{Probably not soon - doesn't make much of a difference anyways}
+  \note<8>[item]{Probably NOT soon - doesn't make much of a difference anyways}
 \end{frame}
 
 \begin{frame}[fragile]{Wrappers in Guile}
@@ -194,37 +187,38 @@
 
 \begin{frame}{Language: Lisp}
   \begin{itemize}
-    \item<+-> You may know Lisp from compsci class
-    \item<+-> With appropriate data types: Not littered with car, cdr, ..
-    \item<+-> Mature language with huge ecosystem
-    % They've sometimes got type comments in attributes
-    \item<+-> Also untyped, but attrsets/records must be complete
-    \item<+-> Requires top-level functions with docstring
-    \item<+-> Written in a purely functional style % Except I/O and memoization
-    \item<+-> Has pattern matching
-    % See: RFC 45 -> We cannot remove unquoted URLs, only deprecate
-    \item<+-> We're stuck with our language, for them everything is library
-    \item<+-> Trivially find definition: `git grep foobar | grep define`
+    \item<1-> You may know Lisp from compsci class
+    \item<2-> With appropriate data types: Not littered with car, cdr, ..
+    \item<3-> Mature language with huge ecosystem
+    \item<4-> Also untyped, but attrsets/records must be complete
+    \item<5-> Requires top-level functions with docstring
+    \item<6-> Written in a purely functional style
+    \item<7-> Has pattern matching
+    \item<8-> We're stuck with our language, for them everything is library
+    \item<9-> Trivially find definition: `git grep foobar | grep define`
   \end{itemize}
+  \note<3>[item]{Sometimes got type comments in attributes}
+  \note<6>[item]{Except I/O and memoization}
+  \note<8>[item]{RFC 45 -> We cannot remove unquoted URLs, only deprecate}
 \end{frame}
 
 \begin{frame}{Focus}
   \begin{itemize}
     % Not even mention of proprietary software allowed (e.g. no Firefox, only Icecat)
-    \item Very GNU-y FSF-y
+    \item<1-> Very GNU-y FSF-y
     % GNU Mes Reduced Binary Seed bootstrap for GNU Guix
     % https://guix.gnu.org/blog/2019/guix-reduces-bootstrap-seed-by-50/
-    \item Reducing bootstrap binaries
+    \item<2-> Reducing bootstrap binaries (GNU Mes)
     % https://guix.gnu.org/blog/2015/reproducible-builds-a-means-to-an-end/
-    \item Reproducible builds
+    \item<3-> Reproducible builds
       \begin{itemize}
         \item `guix build --rounds`
         \item `guix challenge`
       \end{itemize}
-    % Molecular medicine
-    % Ludovic Courtes, Ricardo Wurmus
-    \item Science (HPC@Inria, Medicine@MDC Berlin)
+    \item<4-> Science (HPC@Inria, Medicine@MDC Berlin)
   \end{itemize}
+  \note<2>[item]{250MB -> 120MB}
+  \note<4>[item]{Ludovic Courtes, Ricardo Wurmus, Molecular medicine}
 \end{frame}
 
 \section{Comparison}
@@ -238,7 +232,6 @@
     \textbf{PID1}                 & systemd    & GNU Shepherd              \\
     \textbf{License}              & MIT        & GPLv3+                    \\
     %Supported Platforms  &            &                           \\
-    \textbf{Graphical Installer}  & No         & Yes                       \\
     \textbf{CI}                   & Hydra,     & Cuirass                   \\
     \textbf{Store}                & /nix/store & /gnu/store                \\
                          & /nix/var   & /var/guix                 \\
@@ -260,8 +253,6 @@
 
 \subsection{System configuration}
 \begin{frame}[fragile]{System configuration - Misc}
-% It is functionally also an attribute set
-% They call it: record
   \begin{semiverbatim}
 (operating-system
   (host-name "loris")
@@ -274,12 +265,10 @@
   (packages ...)
   (services ...))
   \end{semiverbatim}
+  \note[item]{Atrribute set / record}
 \end{frame}
 
 \begin{frame}[fragile]{System configuration - Boot config}
-  % Nothing really special -> They really can do everything we can
-  % Notice, how we're explicitly extending the %base-file-systems
-  % No implicit merging
   \begin{semiverbatim}
   (file-systems (cons (file-system
                         (mount-point "/")
@@ -291,13 +280,15 @@
     (list (service openssh-service-type my-openssh-config)
     \%base-services)))
   \end{semiverbatim}
+  \note[item]{Nothing special, can do same as us}
+  \note[item]{No merging -> Explicitly extending \%base}
 \end{frame}
 
-% No merging!
 \begin{frame}{Extending services}
   \begin{center}
     \includegraphics[width=0.75\columnwidth]{resources/service-graph.png}
   \end{center}
+\note[item]{No merging $/rightarrow$ Explicitly extending \%base}
 \end{frame}
 
 \begin{frame}[fragile]{Service config}
@@ -309,8 +300,6 @@
     (extensions
      (list (service-extension shepherd-root-service-type
                               httpd-shepherd-services)
-           (service-extension activation-service-type
-                              httpd-activation)
            (service-extension account-service-type
                               (const \%httpd-accounts))))
     (compose concatenate)
@@ -320,9 +309,6 @@
 \end{frame}
 
 \begin{frame}[fragile]{Package definition}
-  % Maybe highlight things
-  % name & version
-  % source
   \begin{semiverbatim}
 (package
   (name "hello")
@@ -341,10 +327,10 @@
   (home-page "https://www.gnu.org/software/hello/")
   (license gpl3+))
   \end{semiverbatim}
+  \note[item]{Pretty much same, don't need to understand Lisp}
+  \note[item]{build-system INSIDE! -> Doens't affect structure}
 \end{frame}
 
-% TODO: discuss the implications of `build-system` inside
-% TODO: Add modify-phases
 \begin{frame}[fragile]{Overriding packages}
   \begin{center}
     \begin{semiverbatim}
@@ -409,60 +395,65 @@
     (add-after 'install remove-go-references)))
     \end{semiverbatim}
   \end{center}
+  \note[item]{Hooks, kept with replace}
 \end{frame}
 
 \section{Is it any good?}
 
 \begin{frame}{What I noticed while using}
   \begin{itemize}
-    % Only examples, gui is better
-    \item No `nixos-generate-config`
-    % `/etc/shells` is built from all user's shells plus sh and bash
-    % guix environment honors $SHELL
-    \item Fish works flawlessly
-    \item PS1 indicator for `guix environment`
-    \item No `nixos-rebuild test`, only `switch`
-    \item No /usr/bin/env by default, only /bin/sh
-    % maintainer attribute but literally 6 uses, which are all bug-guix@gnu.org
-    \item No package maintainers
-    \item \%base-packages is small
+    \item<1-> No `nixos-generate-config`
+    \item<2-> Fish works flawlessly
+    \item<3-> PS1 indicator for `guix environment`
+    \item<4-> No `nixos-rebuild test`, only `switch`
+    \item<5-> No /usr/bin/env by default, only /bin/sh
+    \item<6-> No package maintainers
+    \item<7-> \%base-packages is small
   \end{itemize}
+  \note<1>[item]{Only examples, gui is better}
+  \note<2>[item]{`/etc/shells` is built from all user's shells plus sh and bash}
+  \note<2>[item]{guix environment honors \$SHELL}
+  \note<6>[item]{Has attr, 6 uses, all bug-guix@gnu.org}
 \end{frame}
 
-% What would stop someone from using it
 \begin{frame}{Limitations}
   \begin{itemize}
-    % Would've put on my laptop next to NixOS otherwise
-    % Should be easy, somebody tried 4 years ago
-    % In NixOS looks like it's just: vgchange -ay
-    \item No root FS on LVM
-    \item Cannot build a package or run system test without compiling all guix modules
-    \item Importing modules that have a syntax error doesn't give a helpful error
-    % Doesn't have many proprietary drivers by default
-    % And in general proprietary software is harder to get
-    % Might be an advantage for you
-    \item Linux-libre
+    \item<1-> No root FS on LVM
+    \item<2-> Cannot build a package or run system test without compiling all guix modules
+    \item<3-> Importing modules that have a syntax error doesn't give a helpful error
+    \item<4-> Linux-libre
   \end{itemize}
+
+  \note[item]{What would stop someone from using it}
+  \note<1>[item]{Should be easy}
+  \note<1>[item]{Somebody tried 4 years ago}
+  \note<1>[item]{On NixOS it's single command in initrd}
+  \note<4>[item]{No proprietary drivers}
+  \note<4>[item]{General: Propr. software hard to get}
+  \note<4>[item]{Maybe moral advantage}
 \end{frame}
 
 \section{Compatibility}
+% TODO: Maybe convert to graphviz
 \begin{frame}{Layers}
   \begin{itemize}
-    \item Source
-    \item (Bag)  % We don't have that
-    \item Daemon
-    % Incompatible because of different builtins
-    % (looks like they just renamed builtins:fetchurl to builtins:download)
-    \item Derivation
-    \item Output % Compatible but useless to import into /nix/store because all paths would have to be rewritten
+    \item<1-> Source
+    \item<2-> (Bag)
+    \item<3-> Daemon
+    \item<4-> Derivation
+    \item<5-> Output
   \end{itemize}
+  \note<1>[item]{Just package source not enough -> library}
+  \note<4>[item]{Different builtins (just renamed?, fetchurl/download)}
+  \note<5>[item]{Useless to import to /nix (rewrite), otherwise great}
+  \note<5>[item]{Maybe call guix from nix somehow}
 \end{frame}
 
 \section{Advantages \\What Nix can learn from Guix}
 
 \begin{frame}{Advantages of Guix}
   \begin{itemize}
-    \item Unique name: Way better to search for
+    \item<+-> Unique name: Way better to search for
       % TODO: Make this appear after
       \begin{itemize}
         \item Much less funny (if you're Dutch or German)
@@ -484,24 +475,26 @@
 \end{frame}
 
 \begin{frame}[fragile]{Grafts}
-  Recursively rewrite all dependent packages
+  Recursively \textbf{rewrite} all dependent packages
   \begin{center}
     \begin{semiverbatim}
-(define bash
+(define openssl
   (package
-    (name "bash")
+    (name "openssl")
     ;; …
-    (replacement bash-fixed)))
+    (replacement openssl-bugfree)))
     \end{semiverbatim}
   \end{center}
 \end{frame}
 
 \begin{frame}{`guix pack`}
   \begin{itemize}
-    \item<+-> Export runnable derivation as tarball %(docker or squashfs)
-    \item<+-> But it has to write to `/gnu/store`
-    \item<+-> Solution: Namespaces with `--relocatable`
+    \item<1-> Export runnable derivation as tarball
+    \item<2-> But it has to write to `/gnu/store`
+    \item<3-> Solution: Namespaces with `--relocatable`
   \end{itemize}
+  \note[item]{or docker or squashfs}
+  \note<3>[item]{fallback to proot}
 \end{frame}
 
 \begin{frame}{What Nix can learn from Guix}
@@ -527,17 +520,16 @@
 
 \begin{frame}{guix lint}
   \begin{itemize}
-    % Validate certain typographical and stylistic rules
     \item Synopsis, description
     \item inputs-should-be-native
     \item Check URLs, suggest mirror/GitHub
-    % We've got this in nixpkgs-update
     \item CVE
     \item Formatting
   \end{itemize}
+  \note[item]{Nixpkgs-update does CVE}
 \end{frame}
 
-\begin{frame}{guix import}
+\begin{frame}{guix import - foo2nix}
   Import from any of these package sets into Guix
   \begin{multicols}{2}
     \begin{itemize}
@@ -548,7 +540,7 @@
       \item cran
       \item texlive
       \item json!
-      \item nix % Doesn't work and throws lots of warnings
+      \item \textbf{nix}
       \item hackage
       \item stackage
       \item elpa
@@ -558,7 +550,7 @@
   \end{multicols}
 \end{frame}
 
-\begin{frame}{guix refresh}
+\begin{frame}{guix refresh - r-ryantm}
   Update from any of these upstream sources
 
   \begin{multicols}{2}
@@ -583,10 +575,6 @@
 \end{frame}
 
 \begin{frame}[fragile]{Nix' Channel Problems}
-%Eelco's Talk: nix-channel
-%  - not git repo
-%  - can't easily pin a channel
-%  - no inter-repo dependencies
   \begin{center}
     \begin{semiverbatim}
 ;; Tell 'guix pull' to use my own repo.
@@ -604,6 +592,9 @@
    (url "https://example.org/evil/proprietary-pkgs.git"))))
     \end{semiverbatim}
   \end{center}
+  \note[item]{Not git repo}
+  \note[item]{Can't pin channel}
+  \note[item]{No inter-channel dependencies}
 \end{frame}
 
 \begin{frame}{Command comparison}

@@ -56,7 +56,6 @@ in
     buildInputs = [
       latexPackage pplatex
       pythonPackages.pygments
-      #pdfpc
     ];
 
     # We could be building from an unclean directory, so remove intermediate files first
