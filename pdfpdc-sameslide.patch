@@ -1,0 +1,13 @@
+diff --git i/src/classes/window/presenter.vala w/src/classes/window/presenter.vala
+index 5a36a51..59db36a 100644
+--- i/src/classes/window/presenter.vala
++++ w/src/classes/window/presenter.vala
+@@ -799,7 +799,7 @@ namespace pdfpc.Window {
+             try {
+                 this.current_view.display(current_slide_number);
+                 this.next_view.display(this.metadata.user_slide_to_real_slide(
+-                    current_user_slide_number + 1));
++                    current_user_slide_number));
+                 if (this.presentation_controller.skip_next()) {
+                     this.strict_next_view.display(current_slide_number + 1, true);
+                 } else {

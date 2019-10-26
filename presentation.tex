@@ -50,6 +50,8 @@
 \usepackage{hyperref}
 %\hypersetup{colorlinks=false,allbordercolors={0 0 0},pdfborderstyle={/S/U/W 1}}
 
+\usepackage{multicol}
+
 % Content
 %\setbeamertemplate{bibliography item}{\insertbiblabel}
 %\setbeamertemplate{bibliography entry title}{}
@@ -73,22 +75,24 @@
   \tableofcontents[pausesections]
 \end{frame}
 
-\section{About myself}
+%\section{About myself}
 
-\begin{frame}{Who am I?}
-  \begin{itemize}
-    \item 2019 Computer Science B.Sc. Graduate @HPE
-    % Yes, I've been trying to TODO
-    \item Now firmware developer at HPE
-    \item NixOS \st{user}lover since 34C3 (Dec 2017)
-    % Maybe some of you have seen my PRs, reviews or posts on Discourse
-    % Even though I'm not contributing a lot, right now
-    \item Nixpkgs contributor from the beginning
-  \end{itemize}
-\end{frame}
+%\begin{frame}{Who am I?}
+%  \begin{itemize}
+%    \item 2019 Computer Science B.Sc. Graduate @HPE
+%    % Yes, I've been trying to TODO
+%    \item Now firmware developer at HPE
+%    \item NixOS \st{user}lover since 34C3 (Dec 2017)
+%    % Maybe some of you have seen my PRs, reviews or posts on Discourse
+%    % Even though I'm not contributing a lot, right now
+%    \item Nixpkgs contributor from the beginning
+%  \end{itemize}
+%\end{frame}
 
-\begin{frame}{Me and Guix?}
-  Who am I to talk about Guix?
+\begin{frame}{Me and Guix}
+  \begin{center}
+    Why do I talk about Guix?
+  \end{center}
 
   % Had finished writing my thesis
   % NixCon coming up
@@ -107,13 +111,13 @@
 \begin{frame}{What is Guix?}
   % TODO: Maybe come up with better descriptions
   \begin{itemize}
-    \item Functional package manager
-    \item Distribution with 100\% declarative configuration
-    \item Transactional upgrades and roll-backs
-    \item Unprivileged package management
+    \item<+-> Functional package manager
+    \item<+-> Distribution with 100\% declarative configuration
+    \item<+-> Transactional upgrades and roll-backs
+    \item<+-> Unprivileged package management
     % Wait, wait, wait, these features look familiar
     % Okay, from the title of this talk you can guess where we're going
-    \item \st{A language}
+    \item<+-> \st{A language}
   \end{itemize}
 \end{frame}
 
@@ -123,56 +127,53 @@
   % There are three different ways to look at it
   \begin{itemize}
     % Any reader of Eelcos thesis, user of Nix and NixOS will feel at home
-    \item<-+> Another implementation of the ideas of Nix and NixOS
+    \item<+-> Another implementation of the ideas of Nix and NixOS
     % Guix commandline is very similar
       % Mostly just different names, sometimes slightly different behaviour
       % Almost all additional features, we could just add to our tools
     % Nixpkgs basically the same in a different language and different standard library
     % NixOS: Services as extending hierarchy, rather than merged attribute sets
-    \item<-+> A reimplementation of Nix, nixpkgs and NixOS
+    \item<+-> A reimplementation of Nix, nixpkgs and NixOS
     % The daemon is literally forked and now incompatible
     % Rebranded lots of variables
-    \item<-+> A fork of Nix (daemon)
+    \item<+-> A fork of Nix (daemon)
   \end{itemize}
 \end{frame}
 
 \begin{frame}{No, but really. What is Guix - Nix?}
   \begin{center}
-    \pause
     \begin{itemize}
       \item<-+> Basically Nix/NixOS
       % Language, command names, library
       \item<-+> With a different \textit{UI}
     \end{itemize}
+  \end{center}
+\end{frame}
 
-    \pause
-
-    But all principles still apply:
-
-    \pause
-
-    Everything you love about Nix is there
-
-    \pause
-    Oh, but they're working on GNU Hurd support
+\begin{frame}{No, but really. What is Guix - Nix?}
+  \begin{center}
+    \begin{description}
+      \item But all principles still apply:
+      \item Everything you love about Nix is there
+      \item<+-> Oh, but they're working on GNU Hurd support
+    \end{description}
   \end{center}
 \end{frame}
 
 \begin{frame}{\textbf{Everything} is written in Guile (Scheme)}
   \begin{itemize}
-    \item \st{Bootloader}
-    \item \st{Kernel}
-    \item Initrd
+    \item<+-> \st{Bootloader}
+    \item<+-> \st{Kernel}
+    \item<+-> Initrd
     % It's very laudable to have a new systemd-less distribution, with it's own init]
-    \item PID 1 (GNU Shepherd, née dmd)
-    \item \st{Guix Daemon} (Planned) % But probably not soon, everything's fine and the daemon doesn't make much of a difference anyways
-    \item Guix commandline tools
-    \item Service Configuration
-    \item Package Definitions (No Shell):
+    \item<+-> PID 1 (GNU Shepherd, née dmd)
+    \item<+-> \st{Guix Daemon} (Planned) % But probably not soon, everything's fine and the daemon doesn't make much of a difference anyways
+    \item<+-> Guix commandline tools
+    \item<+-> Service Configuration
+    \item<+-> Package Definitions (No Shell):
       \begin{itemize}
         \item Phases
-        \item Wrappers [/gnu/store/b7xpfsch173yzyg8ns0bqw2qmgnqwppk-X-wrapper]
-        \item TODO
+        \item Wrappers
       \end{itemize}
   \end{itemize}
 \end{frame}
@@ -197,13 +198,13 @@
     \item<+-> With appropriate data types: Not littered with car, cdr, ..
     \item<+-> Mature language with huge ecosystem
     % They've sometimes got type comments in attributes
-    \item Also untyped, but attrsets/records must be complete
-    \item Requires top-level functions with docstring
-    \item Written in a purely functional style % Except I/O and memoization
-    \item Has pattern matching
+    \item<+-> Also untyped, but attrsets/records must be complete
+    \item<+-> Requires top-level functions with docstring
+    \item<+-> Written in a purely functional style % Except I/O and memoization
+    \item<+-> Has pattern matching
     % See: RFC 45 -> We cannot remove unquoted URLs, only deprecate
-    \item We're stuck with our language, for them everything is library
-    \item Trivially find definition: `git grep foobar | grep define`
+    \item<+-> We're stuck with our language, for them everything is library
+    \item<+-> Trivially find definition: `git grep foobar | grep define`
   \end{itemize}
 \end{frame}
 
@@ -231,19 +232,18 @@
   \begin{tabular}{l|l|l}
                          & Nix        & Guix                      \\
     \hline
-    Daemon               & nix-daemon & guix-daemon (forked)      \\
-    Language             & Nix/Shell  & Guile                     \\
-    Distribution         & NixOS      & Guix System (prev GuixSD) \\
-    PID1                 & systemd    & GNU Shepherd              \\
-    Number of Packages   &            &                           \\
-    License              & MIT        & GPLv3+                    \\
-    Supported Platforms  &            &                           \\
-    Graphical Installer  & No         & Yes                       \\
-    CI                   & Hydra,     & Cuirass                   \\
-    Store                & /nix/store & /gnu/store                \\
+    \textbf{Daemon}               & nix-daemon & guix-daemon (forked)      \\
+    \textbf{Language}             & Nix/Shell  & Guile                     \\
+    \textbf{Distribution}         & NixOS      & Guix System (prev GuixSD) \\
+    \textbf{PID1}                 & systemd    & GNU Shepherd              \\
+    \textbf{License}              & MIT        & GPLv3+                    \\
+    %Supported Platforms  &            &                           \\
+    \textbf{Graphical Installer}  & No         & Yes                       \\
+    \textbf{CI}                   & Hydra,     & Cuirass                   \\
+    \textbf{Store}                & /nix/store & /gnu/store                \\
                          & /nix/var   & /var/guix                 \\
     % Simpler than docbook but also not commonly known
-    Documentation Format & Docbook    & Texinfo                   \\
+    \textbf{Documentation Format} & Docbook    & Texinfo                   \\
   \end{tabular}
 \end{frame}
 
@@ -278,9 +278,9 @@
 
 \begin{frame}[fragile]{System configuration - Boot config}
   % Nothing really special -> They really can do everything we can
-  \begin{semiverbatim}
   % Notice, how we're explicitly extending the %base-file-systems
   % No implicit merging
+  \begin{semiverbatim}
   (file-systems (cons (file-system
                         (mount-point "/")
                         (device "/dev/sda")
@@ -318,7 +318,6 @@
     \end{semiverbatim}
   \end{center}
 \end{frame}
-
 
 \begin{frame}[fragile]{Package definition}
   % Maybe highlight things
@@ -360,6 +359,38 @@
 \end{frame}
 
 \begin{frame}{Builders}
+  \begin{multicols}{3}
+    \begin{itemize}
+      \item \textbf{gnu}
+      \item ant
+      \item android-ndk
+      \item asdf
+      \item cargo
+      \item clojure
+      \item cmake
+      \item dune
+      \item go
+      \item glib
+      \item guile
+      \item minify
+      \item ocaml
+      \item python
+      \item perl
+      \item r
+      \item rakudo
+      \item texlive
+      \item ruby
+      \item waf
+      \item scons
+      \item haskell
+      \item dub
+      \item emacs
+      \item \textbf{font}
+      \item meson
+      \item \textbf{linux-module}
+      \item trivial
+    \end{itemize}
+  \end{multicols}
 \end{frame}
 
 \begin{frame}[fragile]{Third party packages - Go}
@@ -380,28 +411,7 @@
   \end{center}
 \end{frame}
 
-\begin{frame}{Advantages}
-  \begin{itemize}
-    \item Unique name: Way better to search for
-      % TODO: Make this
-      \begin{itemize}
-        \item Much less funny (if you're Dutch or German)
-      \end{itemize}
-    % Lots of configuration options, including encryption
-    \item Graphical (ncurses) installer!
-    \item Can combine `guix environment guix --ad-hoc git strace`!!
-    \item Has `snippet` in addition to patches as a script to modify the sources
-    % We don't but have last week decided against SELinux on NixOS
-    \item Has SELinux policy (for foreign distros)
-    \item Phases can be replaced while keeping "hooks"
-    \item Native compilation for foreign archs with QEMU
-    % Store contains only necessary closure!
-    % Can even disable network
-    \item `guix environment --container`
-    \item `guix system container /etc/config.scm`
-    \item Python3 is already default
-  \end{itemize}
-\end{frame}
+\section{Is it any good?}
 
 \begin{frame}{What I noticed while using}
   \begin{itemize}
@@ -417,12 +427,6 @@
     \item No package maintainers
     \item \%base-packages is small
   \end{itemize}
-\end{frame}
-
-\begin{frame}{`guix pack`}
-- `guix pack`
-- `guix pack --relocatable`!!!!
-  Can output as tarball, docker or squashfs format!
 \end{frame}
 
 % What would stop someone from using it
@@ -441,39 +445,65 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Grafts}
-  TODO
-\end{frame}
-
 \section{Compatibility}
 \begin{frame}{Layers}
-  Source
-  % Incompatible because of different builtins
-  % (looks like they just renamed builtins:fetchurl to builtins:download)
-  Derivation
-  (Bag)  % We don't have that
-  Output % Compatible but useless to import into /nix/store because all paths would have to be rewritten
+  \begin{itemize}
+    \item Source
+    \item (Bag)  % We don't have that
+    \item Daemon
+    % Incompatible because of different builtins
+    % (looks like they just renamed builtins:fetchurl to builtins:download)
+    \item Derivation
+    \item Output % Compatible but useless to import into /nix/store because all paths would have to be rewritten
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Where development happens}
+\section{Advantages \\What Nix can learn from Guix}
+
+\begin{frame}{Advantages of Guix}
+  \begin{itemize}
+    \item Unique name: Way better to search for
+      % TODO: Make this appear after
+      \begin{itemize}
+        \item Much less funny (if you're Dutch or German)
+      \end{itemize}
+    % Lots of configuration options, including encryption
+    \item<+-> Graphical (ncurses) installer!
+    \item<+-> Can combine `guix environment guix --ad-hoc git strace`!!
+    \item<+-> Has `snippet` in addition to patches as a script to modify the sources
+    % We don't but have last week decided against SELinux on NixOS
+    \item<+-> Has SELinux policy (for foreign distros)
+    \item<+-> Phases can be replaced while keeping "hooks"
+    \item<+-> Native compilation for foreign archs with QEMU
+    % Store contains only necessary closure!
+    % Can even disable network
+    \item<+-> `guix environment --container`
+    \item<+-> `guix system container /etc/config.scm`
+    \item<+-> Python3 is already default
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Grafts}
+  Recursively rewrite all dependent packages
   \begin{center}
-    \begin{tabular}{l|l|l}
-      & Nix & Guix \\
-      \hline
-      Code          & GitHub Repo  & Savannah \\
-      Contributing  & GitHub PR    & patches ML \\
-      % Yes, they have a pretty web interface but it's just for viewing
-      Issues        & GitHub Issue & bug ML \\
-      Announcements & Discourse    & info ML \\
-      Discussion    & Discourse    & devel ML \\
-      Chat          & IRC          & IRC \\
-    \end{tabular}
+    \begin{semiverbatim}
+(define bash
+  (package
+    (name "bash")
+    ;; …
+    (replacement bash-fixed)))
+    \end{semiverbatim}
   \end{center}
 \end{frame}
 
-\section{What Nix can learn from Guix}
+\begin{frame}{`guix pack`}
+  \begin{itemize}
+    \item<+-> Export runnable derivation as tarball %(docker or squashfs)
+    \item<+-> But it has to write to `/gnu/store`
+    \item<+-> Solution: Namespaces with `--relocatable`
+  \end{itemize}
+\end{frame}
 
-% TODO: improve
 \begin{frame}{What Nix can learn from Guix}
   \begin{itemize}
     \item Translation (Manual, synopses, description)
@@ -481,81 +511,100 @@
   \end{itemize}
 \end{frame}
 
-% TODO: Improve
 \begin{frame}{More integrated and opinionated}
   \begin{itemize}
     % Requires Emacs lol
     % Can even format just a single package in a file
     \item Official Code formatter
-    \item Unified commandline, like Nix 2.0 % Makes things easy to discover
+    % Eelco said yesterday, he's working on moving everything there
+    \item Unified commandline, like Nix 2.0
+    \item `guix deploy` is like NixOps % Haven't tried yet
     \item `guix lint`
     \item `guix import`
     \item `guix refresh` (Like r-ryantm)
-    \item `guix deploy` is like NixOps % Haven't tried yet
   \end{itemize}
 \end{frame}
 
 \begin{frame}{guix lint}
-    Validate packages in many aspects
-      synopsis, description
-        Validate certain typographical and stylistic rules
-      indputs-should-be-native
-      source
-      home-page
-      mirror-url
-      github-url
-      source-file-name
-        Report invalid
-        Suggest mirror://
-        Suggest Github
-      source-unstable-tarball
-        Parse the source URL to determine if a tarball from GitHub is autogenerated or if it is a release tarball
-      cve
-        Report known CVE's TODO: HOW??? Probably by version
-        We're doing something similar: https://discourse.nixos.org/t/nixpkgs-update-partners-with-serokell-and-nlnet-to-add-cve-reporting/3577/10
-      formatting
+  \begin{itemize}
+    % Validate certain typographical and stylistic rules
+    \item Synopsis, description
+    \item inputs-should-be-native
+    \item Check URLs, suggest mirror/GitHub
+    % We've got this in nixpkgs-update
+    \item CVE
+    \item Formatting
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{guix import}
-    gnu
-    pypi
-    gem
-    cpan
-    cran
-    texlive
-    json!
-    nix % Doesn't work and throws lots of warnings
-    hackage
-    stackage
-    elpa
-    crate
-    opam
+  Import from any of these package sets into Guix
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item gnu
+      \item pypi
+      \item gem
+      \item cpan
+      \item cran
+      \item texlive
+      \item json!
+      \item nix % Doesn't work and throws lots of warnings
+      \item hackage
+      \item stackage
+      \item elpa
+      \item crate
+      \item opam
+    \end{itemize}
+  \end{multicols}
 \end{frame}
 
 \begin{frame}{guix refresh}
-      gnu
-      gnome
-      kde
-      xorg
-      kernel.org
-      elpa
-      cran
-      bioconductor
-      cpan
-      pypi
-      gem
-      github
-      hackage
-      stackage
-      launchpad
+  Update from any of these upstream sources
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item gnu
+      \item gnome
+      \item kde
+      \item xorg
+      \item kernel.org
+      \item elpa
+      \item cran
+      \item bioconductor
+      \item cpan
+      \item pypi
+      \item gem
+      \item github
+      \item hackage
+      \item stackage
+      \item launchpad
+    \end{itemize}
+  \end{multicols}
 \end{frame}
 
-\section{What can Nix users learn from Guix?}
-% You can use services to do everything
-% -> Don't rely on imports
+\begin{frame}[fragile]{Nix' Channel Problems}
+%Eelco's Talk: nix-channel
+%  - not git repo
+%  - can't easily pin a channel
+%  - no inter-repo dependencies
+  \begin{center}
+    \begin{semiverbatim}
+;; Tell 'guix pull' to use my own repo.
+(list (channel
+        (name 'guix)
+        (url "https://example.org/my-guix.git")
+        (branch "super-hacks")))
 
-\section{Is it useful to install Guix?}
-\section{Can we synergize?}
+; Channel dependencies
+(channel
+ (version 0)
+ (dependencies
+  (channel
+   (name some-collection)
+   (url "https://example.org/evil/proprietary-pkgs.git"))))
+    \end{semiverbatim}
+  \end{center}
+\end{frame}
 
 \begin{frame}{Command comparison}
   \begin{tabular}{l|l}
@@ -582,6 +631,12 @@
   \end{tabular}
 \end{frame}
 
+%\section{What can Nix users learn from Guix?}
+%% You can use services to do everything
+%% -> Don't rely on imports
+%\section{Is it useful to install Guix?}
+%\section{Can we synergize?}
+
 \begin{frame}{Summary}
   \begin{itemize}
     \item Basically NixOS with Lisp instead of Nix\&Bash
@@ -594,6 +649,22 @@
 \end{frame}
 
 \appendix
+
+\begin{frame}{Where development happens}
+  \begin{center}
+    \begin{tabular}{l|l|l}
+      & Nix & Guix \\
+      \hline
+      Code          & GitHub Repo  & Savannah \\
+      Contributing  & GitHub PR    & patches ML \\
+      % Yes, they have a pretty web interface but it's just for viewing
+      Issues        & GitHub Issue & bug ML \\
+      Announcements & Discourse    & info ML \\
+      Discussion    & Discourse    & devel ML \\
+      Chat          & IRC          & IRC \\
+    \end{tabular}
+  \end{center}
+\end{frame}
 
 \begin{frame}{Sources of information}
   \begin{tabular}{l|l}
@@ -620,6 +691,8 @@
     \begin{tabular}{l|r|r}
       & Nix & Guix \\
       \hline
+      % Last summer
+      Packages       & 48.646    & 7.892 \\
       First commit   & 2003      & 2012 \\
       Commits        & 197.755   & 49.623 \\
       Contributors   & 3.624     & 330 \\
